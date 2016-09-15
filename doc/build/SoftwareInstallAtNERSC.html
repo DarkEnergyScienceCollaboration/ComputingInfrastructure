@@ -1,0 +1,152 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>NERSC Software Installation for DESC &mdash; LSST DESC Computing Infrastructure 0.0.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.0.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="LSST DESC Computing Infrastructure 0.0.0 documentation" href="sphinxDoc.html" />
+    <link rel="prev" title="LSST Dark Energy Science Collaboration : Developing DESC Software" href="Developing-DESC-Software.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="Developing-DESC-Software.html" title="LSST Dark Energy Science Collaboration : Developing DESC Software"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="sphinxDoc.html">LSST DESC Computing Infrastructure 0.0.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="nersc-software-installation-for-desc">
+<h1>NERSC Software Installation for DESC<a class="headerlink" href="#nersc-software-installation-for-desc" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="dmstack">
+<h2>DMStack<a class="headerlink" href="#dmstack" title="Permalink to this headline">¶</a></h2>
+<p>Using the conda dev channel, we can install a relatively up to date version of lsst_apps and lsst_sims on Cori at NERSC.</p>
+<div class="section" id="how-to-use">
+<h3>How to use<a class="headerlink" href="#how-to-use" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Log onto Cori</li>
+<li>The installation can be found in: /project/projectdirs/lsst/lsstDM/Cori/conda-env
+most recent install is 2016-04-15</li>
+<li>source &lt;PathToInstallation&gt;/setupVanillaStack.sh</li>
+</ul>
+<p>The above will update your environment to use the conda environment installed with DMstack.  To exit and reset your environment, at the
+command line do:
+&#8220;source deactivate&#8221;</p>
+</div>
+<div class="section" id="installation-instructions">
+<h3>Installation Instructions<a class="headerlink" href="#installation-instructions" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-bash" id="conda-install-instructions"><div class="highlight"><pre>module swap PrgEnv-intel PrgEnv-gnu
+module swap gcc gcc/4.9.3
+module load python/2.7-anaconda
+<span class="nb">export</span> <span class="nv">CONDA_ENVS_PATH</span><span class="o">=</span>$PWD/conda-env
+conda create --prefix /project/projectdirs/lsst/lsstDM/Cori/conda-env/&lt;date&gt;/LSST_STACK --channel http://eupsforge.net/conda/dev lsst-apps
+<span class="nb">source</span> activate /project/projectdirs/lsst/lsstDM/Cori/conda-env/2016-04-15/LSST_STACK
+conda install --channel http://eupsforge.net/conda/dev lsst-sims
+conda install nose
+conda install panda
+</pre></div>
+</div>
+<p>afw expects to find libssl.so.10 and libcrypto.so.10</p>
+<div class="highlight-bash" id="symlink-libs"><div class="highlight"><pre> ln -s /project/projectdirs/lsst/lsstDM/Cori/conda-env/.pkgs/openssl-1.0.2g-0/lib/libcrypto.so.1.0.0 /project/projectdirs/lsst/lsstDM/Cori/conda-env/&lt;date&gt;/LSST_STACK/opt/lsst/afw/lib/libcrypto.so.10
+ ln -s /project/projectdirs/lsst/lsstDM/Cori/conda-env/.pkgs/openssl-1.0.2g-0/lib/libssl.so.1.0.0 /project/projectdirs/lsst/lsstDM/Cori/conda-env/&lt;date&gt;/LSST_STACK/opt/lsst/afw/lib/libssl.so.10
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="sphinxDoc.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">NERSC Software Installation for DESC</a><ul>
+<li><a class="reference internal" href="#dmstack">DMStack</a><ul>
+<li><a class="reference internal" href="#how-to-use">How to use</a></li>
+<li><a class="reference internal" href="#installation-instructions">Installation Instructions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="Developing-DESC-Software.html"
+                        title="previous chapter">LSST Dark Energy Science Collaboration : Developing DESC Software</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/SoftwareInstallAtNERSC.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016, LSST DESC Collaboration.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.3</a>
+      
+      |
+      <a href="_sources/SoftwareInstallAtNERSC.txt"
+          rel="nofollow">Page source</a></li>
+    </div>
+
+    
+
+    
+  </body>
+</html>
