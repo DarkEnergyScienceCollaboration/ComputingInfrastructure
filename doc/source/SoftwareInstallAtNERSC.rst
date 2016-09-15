@@ -1,41 +1,81 @@
-##################################
+####################################
 NERSC Software Installation for DESC
-##################################
+####################################
+
+.. IMPORTANT::
+   Cori will be down for approximately the next 6 weeks. Please use Edison during this time.
+
+Software Installation Location
+=================================
+- Cori:   /global/common/cori/contrib/lsst
+- Edison: /global/common/edison/contrib/lsst
 
 DMStack
 ==================================
-Using the conda dev channel, we can install a relatively up to date version of lsst_apps and lsst_sims on Cori at NERSC.
 
-How to use
+Installed Versions
 ----------------------------------
-- Log onto Cori
-- The installation can be found in: /project/projectdirs/lsst/lsstDM/Cori/conda-env
-  most recent install is 2016-04-15
-- source <PathToInstallation>/setupVanillaStack.sh
+
+- 20160907 most recent installation using the sims conda channel
+- v12_0  official DMstack release
+
+
+Cori: /global/common/cori/contrib/lsst/lsstDM
+
+Edison: /global/common/edison/contrib/lsst/lsstDM
+
+Setup for Bash Shell Users
+----------------------------------
+.. code-block:: bash
+   :name: setup-dmstack 
+
+   source <PathToInstallation>/setupStack-<Version>.sh [-v]
 
 The above will update your environment to use the conda environment installed with DMstack.  To exit and reset your environment, at the 
 command line do:
 "source deactivate"
 
-Installation Instructions
+Phosim
+===================================
+
+Installed Versions
+------------------------------------
+
+- v3.5.3
+- v3.5.2
+
+Cori: /global/common/cori/contrib/lsst/phosim
+
+Edison: /global/common/edison/contrib/lsst/phosim
+
+Setup for Bash Shell Users
+------------------------------------------
+
+.. code-block:: bash
+   :name: setup-phosim 
+
+   source <PathToInstallationDirectory>/setupPhosim.sh
+
+run any version of phosim available under its installation directory i.e.  v3.5.3
+
+Notes for Installation Maintainers 
+===================================
+
+DMstack Installation Instructions
 ----------------------------------
+When possible we use the sims conda channel
+
 .. code-block:: bash
    :name: conda-install-instructions
    
    module swap PrgEnv-intel PrgEnv-gnu
    module swap gcc gcc/4.9.3
    module load python/2.7-anaconda
-   export CONDA_ENVS_PATH=$PWD/conda-env
-   conda create --prefix /project/projectdirs/lsst/lsstDM/Cori/conda-env/<date>/LSST_STACK --channel http://eupsforge.net/conda/dev lsst-apps
-   source activate /project/projectdirs/lsst/lsstDM/Cori/conda-env/2016-04-15/LSST_STACK
-   conda install --channel http://eupsforge.net/conda/dev lsst-sims
-   conda install nose
-   conda install panda
-   
-afw expects to find libssl.so.10 and libcrypto.so.10
+   export CONDA_ENVS_PATH=$PWD/envs
+   conda create --prefix /global/common/edison/contrib/lsst/lsstDM/<date>
+   --channel http://conda.lsst.codes/sims python=2 lsst-apps
+   source activate /global/common/edison/contrib/lsst/lsstDM/<date>
+   conda install --channel http://conda.lsst.codes/sims lsst-sims
 
-.. code-block:: bash
-   :name: symlink-libs
-      
-    ln -s /project/projectdirs/lsst/lsstDM/Cori/conda-env/.pkgs/openssl-1.0.2g-0/lib/libcrypto.so.1.0.0 /project/projectdirs/lsst/lsstDM/Cori/conda-env/<date>/LSST_STACK/opt/lsst/afw/lib/libcrypto.so.10
-    ln -s /project/projectdirs/lsst/lsstDM/Cori/conda-env/.pkgs/openssl-1.0.2g-0/lib/libssl.so.1.0.0 /project/projectdirs/lsst/lsstDM/Cori/conda-env/<date>/LSST_STACK/opt/lsst/afw/lib/libssl.so.10
+Phosim Installation Instructions
+------------------------------------
