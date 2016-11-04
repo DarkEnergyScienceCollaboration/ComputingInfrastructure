@@ -51,55 +51,86 @@
             
   <div class="section" id="nersc-software-installation-for-desc">
 <h1>NERSC Software Installation for DESC<a class="headerlink" href="#nersc-software-installation-for-desc" title="Permalink to this headline">¶</a></h1>
-<div class="admonition important">
-<p class="first admonition-title">Important</p>
-<p class="last">Cori will be down for approximately the next 6 weeks. Please use Edison during this time.</p>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p><strong>Quick Start for DMstack users</strong></p>
+<ul class="last simple">
+<li><strong>Cori:</strong>
+source /global/common/cori/contrib/lsst/lsstDM/setupStack-12_1.sh</li>
+<li><strong>Edison:</strong>
+source /global/common/edison/contrib/lsst/lsstDM/setupStack-12_1.sh</li>
+</ul>
 </div>
-<div class="section" id="software-installation-location">
-<h2>Software Installation Location<a class="headerlink" href="#software-installation-location" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
+<div class="section" id="software-installation-locations">
+<h2>Software Installation Locations<a class="headerlink" href="#software-installation-locations" title="Permalink to this headline">¶</a></h2>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<ul class="last simple">
 <li>Cori:   /global/common/cori/contrib/lsst</li>
 <li>Edison: /global/common/edison/contrib/lsst</li>
 </ul>
 </div>
+</div>
 <div class="section" id="dmstack">
 <h2>DMStack<a class="headerlink" href="#dmstack" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="installed-versions">
-<h3>Installed Versions<a class="headerlink" href="#installed-versions" title="Permalink to this headline">¶</a></h3>
-<ul class="simple">
-<li>20160907 most recent installation using the sims conda channel</li>
-<li>v12_0  official DMstack release</li>
-</ul>
-<p>Cori: /global/common/cori/contrib/lsst/lsstDM</p>
-<p>Edison: /global/common/edison/contrib/lsst/lsstDM</p>
-</div>
+<table border="1" class="docutils">
+<colgroup>
+<col width="8%" />
+<col width="46%" />
+<col width="46%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Version</th>
+<th class="head">Cori Directory</th>
+<th class="head">Edison Directory</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>12_1</td>
+<td>/global/common/cori/contrib/lsst/lsstDM/v12_1</td>
+<td>/global/common/edison/contrib/lsst/lsstDM/v12_1</td>
+</tr>
+</tbody>
+</table>
 <div class="section" id="setup-for-bash-shell-users">
 <h3>Setup for Bash Shell Users<a class="headerlink" href="#setup-for-bash-shell-users" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-bash" id="setup-dmstack"><div class="highlight"><pre><span class="nb">source</span> &lt;PathToInstallation&gt;/setupStack-&lt;Version&gt;.sh <span class="o">[</span>-v<span class="o">]</span>
 </pre></div>
 </div>
-<p>The above will update your environment to use the conda environment installed with DMstack.  To exit and reset your environment, at the
-command line do:
-&#8220;source deactivate&#8221;</p>
+<p>The above will update your environment to use the conda environment installed with DMstack. You may then &#8220;setup&#8221; any DMstack or sims packages as usual:</p>
+<div class="highlight-bash" id="setup-lsst-apps"><div class="highlight"><pre><span class="nb">source</span> /global/common/cori/contrib/lsst/lsstDM/setupStack-12_1.sh
+setup lsst_apps
+</pre></div>
+</div>
 </div>
 </div>
 <div class="section" id="phosim">
 <h2>Phosim<a class="headerlink" href="#phosim" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="8%" />
+<col width="46%" />
+<col width="46%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Version</th>
+<th class="head">Cori Directory</th>
+<th class="head">Edison Directory</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>v3.5.3</td>
+<td>/global/common/cori/contrib/lsst/phosim/v3.5.3</td>
+<td>/global/common/edison/contrib/lsst/phosim/v3.5.3</td>
+</tr>
+</tbody>
+</table>
 <div class="section" id="id1">
-<h3>Installed Versions<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
-<ul class="simple">
-<li>v3.5.3</li>
-<li>v3.5.2</li>
-</ul>
-<p>Cori: /global/common/cori/contrib/lsst/phosim</p>
-<p>Edison: /global/common/edison/contrib/lsst/phosim</p>
-</div>
-<div class="section" id="id2">
-<h3>Setup for Bash Shell Users<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<h3>Setup for Bash Shell Users<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-bash" id="setup-phosim"><div class="highlight"><pre><span class="nb">source</span> &lt;PathToInstallationDirectory&gt;/setupPhosim.sh
 </pre></div>
 </div>
-<p>run any version of phosim available under its installation directory i.e.  v3.5.3</p>
+<p>Now the environment is set up to run any version of phosim available under its installation directory i.e.  v3.5.3</p>
 </div>
 </div>
 <div class="section" id="notes-for-installation-maintainers">
@@ -117,6 +148,7 @@ conda create --prefix /global/common/edison/contrib/lsst/lsstDM/&lt;date&gt;
 conda install --channel http://conda.lsst.codes/sims lsst-sims
 </pre></div>
 </div>
+<p>Installation from Source</p>
 </div>
 <div class="section" id="phosim-installation-instructions">
 <h3>Phosim Installation Instructions<a class="headerlink" href="#phosim-installation-instructions" title="Permalink to this headline">¶</a></h3>
@@ -133,15 +165,13 @@ conda install --channel http://conda.lsst.codes/sims lsst-sims
   <h3><a href="sphinxDoc.html">Table Of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">NERSC Software Installation for DESC</a><ul>
-<li><a class="reference internal" href="#software-installation-location">Software Installation Location</a></li>
+<li><a class="reference internal" href="#software-installation-locations">Software Installation Locations</a></li>
 <li><a class="reference internal" href="#dmstack">DMStack</a><ul>
-<li><a class="reference internal" href="#installed-versions">Installed Versions</a></li>
 <li><a class="reference internal" href="#setup-for-bash-shell-users">Setup for Bash Shell Users</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#phosim">Phosim</a><ul>
-<li><a class="reference internal" href="#id1">Installed Versions</a></li>
-<li><a class="reference internal" href="#id2">Setup for Bash Shell Users</a></li>
+<li><a class="reference internal" href="#id1">Setup for Bash Shell Users</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#notes-for-installation-maintainers">Notes for Installation Maintainers</a><ul>

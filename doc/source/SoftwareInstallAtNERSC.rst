@@ -2,27 +2,29 @@
 NERSC Software Installation for DESC
 ####################################
 
-.. IMPORTANT::
-   Cori will be down for approximately the next 6 weeks. Please use Edison during this time.
+.. tip:: **Quick Start for DMstack users**
 
-Software Installation Location
+   - **Cori:** 
+     source /global/common/cori/contrib/lsst/lsstDM/setupStack-12_1.sh 
+
+   - **Edison:** 
+     source /global/common/edison/contrib/lsst/lsstDM/setupStack-12_1.sh
+
+Software Installation Locations
 =================================
-- Cori:   /global/common/cori/contrib/lsst
-- Edison: /global/common/edison/contrib/lsst
+.. note::
+   - Cori:   /global/common/cori/contrib/lsst
+   - Edison: /global/common/edison/contrib/lsst
 
 DMStack
 ==================================
 
-Installed Versions
-----------------------------------
++---------+----------------------------------------------------+---------------------------------------------------+
+| Version |     Cori Directory                                 | Edison Directory                                  |   
++=========+====================================================+===================================================+
+| 12_1    |/global/common/cori/contrib/lsst/lsstDM/v12_1       | /global/common/edison/contrib/lsst/lsstDM/v12_1   |
++---------+----------------------------------------------------+---------------------------------------------------+
 
-- 20160907 most recent installation using the sims conda channel
-- v12_0  official DMstack release
-
-
-Cori: /global/common/cori/contrib/lsst/lsstDM
-
-Edison: /global/common/edison/contrib/lsst/lsstDM
 
 Setup for Bash Shell Users
 ----------------------------------
@@ -31,22 +33,23 @@ Setup for Bash Shell Users
 
    source <PathToInstallation>/setupStack-<Version>.sh [-v]
 
-The above will update your environment to use the conda environment installed with DMstack.  To exit and reset your environment, at the 
-command line do:
-"source deactivate"
+The above will update your environment to use the conda environment installed with DMstack. You may then "setup" any DMstack or sims packages as usual:
+
+.. code-block:: bash
+   :name: setup-lsst_apps
+
+   source /global/common/cori/contrib/lsst/lsstDM/setupStack-12_1.sh
+   setup lsst_apps
 
 Phosim
 ===================================
 
-Installed Versions
-------------------------------------
++---------+----------------------------------------------------+---------------------------------------------------+
+| Version |     Cori Directory                                 | Edison Directory                                  |   
++=========+====================================================+===================================================+
+| v3.5.3  |/global/common/cori/contrib/lsst/phosim/v3.5.3      | /global/common/edison/contrib/lsst/phosim/v3.5.3  |
++---------+----------------------------------------------------+---------------------------------------------------+
 
-- v3.5.3
-- v3.5.2
-
-Cori: /global/common/cori/contrib/lsst/phosim
-
-Edison: /global/common/edison/contrib/lsst/phosim
 
 Setup for Bash Shell Users
 ------------------------------------------
@@ -56,7 +59,7 @@ Setup for Bash Shell Users
 
    source <PathToInstallationDirectory>/setupPhosim.sh
 
-run any version of phosim available under its installation directory i.e.  v3.5.3
+Now the environment is set up to run any version of phosim available under its installation directory i.e.  v3.5.3
 
 Notes for Installation Maintainers 
 ===================================
@@ -76,6 +79,9 @@ When possible we use the sims conda channel
    --channel http://conda.lsst.codes/sims python=2 lsst-apps
    source activate /global/common/edison/contrib/lsst/lsstDM/<date>
    conda install --channel http://conda.lsst.codes/sims lsst-sims
+
+Installation from Source
+
 
 Phosim Installation Instructions
 ------------------------------------
