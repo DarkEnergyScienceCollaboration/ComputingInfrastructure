@@ -53,7 +53,7 @@ clean:
 	rm -rf $(BUILDDIR)/*
 
 confluence:
-	$(shell rsync --exclude=sphinxDoc.rst -a ./source/ ./confluence) 
+	$(shell rsync --exclude-from=./exclusions -a ./source/ ./confluence) 
 	$(SPHINXBUILD) -c confluence -b html $(CSPHINXOPTS) $(BUILDDIR)/basic
 	@echo
 	@echo "Build finished. The HTML pages are in $(BUILDDIR)/basic."
