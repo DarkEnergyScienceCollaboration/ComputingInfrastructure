@@ -4,12 +4,17 @@
 # You can set these variables from the command line.
 SPHINXOPTS    =
 SPHINXBUILD   = sphinx-build
+PANDOCBUILD   = pandoc
 PAPER         =
 BUILDDIR      = build
 
 # User-friendly check for sphinx-build
 ifeq ($(shell which $(SPHINXBUILD) >/dev/null 2>&1; echo $$?), 1)
 $(error The '$(SPHINXBUILD)' command was not found. Make sure you have Sphinx installed, then set the SPHINXBUILD environment variable to point to the full path of the '$(SPHINXBUILD)' executable. Alternatively you can add the directory with the executable to your PATH. If you don't have Sphinx installed, grab it from http://sphinx-doc.org/)
+endif
+
+ifeq ($(shell which $(PANDOCBUILD) >/dev/null 2>&1; echo $$?), 1)
+$(error The '$(PANDOCBUILD)' command was not found. Make sure you have pandoc installed)
 endif
 
 # Internal variables.
@@ -20,7 +25,11 @@ CSPHINXOPTS   = -d $(BUILDDIR)/cdoctrees $(PAPEROPT_$(PAPER)) $(SPHINXOPTS) conf
 # the i18n builder cannot share the environment and doctrees with the others
 I18NSPHINXOPTS  = $(PAPEROPT_$(PAPER)) $(SPHINXOPTS) source
 
-.PHONY: help clean copyfiles confluence html dirhtml singlehtml pickle json htmlhelp qthelp devhelp epub latex latexpdf text man changes linkcheck doctest coverage gettext
+RSTS := $(filter-out source/sphinxDoc.rst, $(wildcard source/*.rst))
+BASES := $(basename $(RSTS))
+HTMLOUT := $(addsuffix .html, $(BASES))
+ 
+.PHONY: help clean confluence html dirhtml singlehtml pickle json htmlhelp qthelp devhelp epub latex latexpdf text man changes linkcheck doctest coverage gettext
 
 help:
 	@echo "Please use \`make <target>' where <target> is one of"
@@ -52,12 +61,13 @@ help:
 clean:
 	rm -rf $(BUILDDIR)/*
 
-confluence:
-	$(shell rsync --exclude-from=./exclusions -a ./source/ ./confluence) 
-	$(SPHINXBUILD) -c confluence -b html $(CSPHINXOPTS) $(BUILDDIR)/basic
-	@echo
-	@echo "Build finished. The HTML pages are in $(BUILDDIR)/basic."
+confluence : $(HTMLOUT)
 
+%.html : %.rst build/basic
+	$(PANDOCBUILD) $< -s -f rst -t html --normalize -o $(BUILDDIR)/basic/$(notdir $@)
+
+build/basic : 
+	$(shell mkdir build/basic)
 
 html:
 	$(SPHINXBUILD) -b html $(ALLSPHINXOPTS) $(BUILDDIR)/html
